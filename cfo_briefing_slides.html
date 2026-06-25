@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFO Briefing — Revenue Forecast Audit · Möbel-Modern GmbH</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+  <style>
+    :root {
+      --blue-dark:  #0b3d91;
+      --navy:       #1b1b2f;
+      --yellow:     #ffd400;
+      --red-alert:  #e74c3c;
+      --green-ok:   #2ecc71;
+      --grey:       #888;
+    }
+    .reveal { font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; letter-spacing: 0; }
+    .reveal h2 { font-size: 1.25em; border-bottom: 2px solid var(--yellow); padding-bottom: 0.15em; margin-bottom: 0.35em; }
+
+    /* Slide header bar */
+    .slide-meta {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(11,61,145,0.85); padding: 4px 24px;
+      font-size: 0.5em; color: #aac; display: flex; justify-content: space-between;
+      z-index: 100;
+    }
+
+    /* Accent colours */
+    .yellow  { color: var(--yellow); font-weight: bold; }
+    .red     { color: var(--red-alert); font-weight: bold; }
+    .green   { color: var(--green-ok); font-weight: bold; }
+    .grey    { color: var(--grey); }
+
+    /* Metric cards */
+    .card-row { display: flex; gap: 0.5em; justify-content: center; margin-top: 0.4em; flex-wrap: wrap; }
+    .card {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px; padding: 0.3em 0.8em; text-align: center; min-width: 120px;
+    }
+    .card .val  { font-size: 1.3em; font-weight: bold; }
+    .card .lbl  { font-size: 0.6em; color: #aac; margin-top: 0.05em; }
+    .card.good  { border-color: var(--green-ok); }
+    .card.warn  { border-color: var(--yellow); }
+    .card.bad   { border-color: var(--red-alert); }
+
+    /* Two-column layout */
+    .two-col { display: flex; gap: 1.2em; align-items: flex-start; }
+    .two-col > div { flex: 1; }
+
+    /* Flaw box */
+    .flaw {
+      background: rgba(231,76,60,0.12); border-left: 3px solid var(--red-alert);
+      border-radius: 4px; padding: 0.25em 0.6em; margin-bottom: 0.25em; font-size: 0.68em;
+    }
+    .flaw .flaw-title { font-weight: bold; color: var(--red-alert); margin-bottom: 0.1em; }
+
+    /* Comparison table */
+    .cmp-table { width: 100%; border-collapse: collapse; font-size: 0.72em; margin-top: 0.3em; }
+    .cmp-table th { background: var(--blue-dark); padding: 0.3em 0.5em; text-align: left; }
+    .cmp-table td { padding: 0.25em 0.5em; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .cmp-table tr:nth-child(even) td { background: rgba(255,255,255,0.04); }
+
+    /* Risk bar */
+    .risk-bar-wrap { margin: 0.35em 0; }
+    .risk-label { font-size: 0.65em; margin-bottom: 0.1em; }
+    .risk-bar-bg { background: rgba(255,255,255,0.1); border-radius: 4px; height: 22px; position: relative; }
+    .risk-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.65em; font-weight: bold; }
+
+    /* Recommendation box */
+    .rec-box {
+      background: rgba(46,204,113,0.12); border: 1px solid var(--green-ok);
+      border-radius: 6px; padding: 0.4em 0.7em; margin-top: 0.4em; font-size: 0.7em;
+    }
+    .rec-box .rec-title { color: var(--green-ok); font-weight: bold; font-size: 1em; margin-bottom: 0.2em; }
+
+    .ci-box {
+      background: rgba(255,212,0,0.1); border: 1px solid var(--yellow);
+      border-radius: 6px; padding: 0.3em 0.7em; font-size: 0.7em; margin-top: 0.3em;
+    }
+
+    /* Slide number override */
+    .reveal .slide-number { background: transparent; }
+
+    /* Base font size — everything scales from here */
+    .reveal .slides section { font-size: 0.78em; padding: 0.5em 0 0 0; overflow: hidden; }
+  </style>
+</head>
+<body class="quarto-dark">
+
+  <!-- Persistent slide header -->
+  <div class="slide-meta">
+    <span>Möbel-Modern GmbH &nbsp;·&nbsp; Revenue Forecast Audit</span>
+    <span>Strictly Confidential &nbsp;·&nbsp; CFO Briefing &nbsp;·&nbsp; June 2026</span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ═══════════════════════════════════════════════════════════
+           SLIDE 1 — Deconstruction of the Baseline
+           ═══════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0b3d91">
+        <h2>Slide 1 &nbsp;·&nbsp; Why the 96 % Cannot Be Trusted</h2>
+
+        <div style="font-size:0.75em; margin-bottom:0.4em;">
+          The internally reported R² of <span class="yellow">96 %</span> is the result of four systematic
+          methodological errors — not genuine predictive power.
+        </div>
+
+        <div class="flaw">
+          <div class="flaw-title">Flaw 1 · Target Leakage (rolling average)</div>
+          The 3-day and 7-day rolling revenue averages included <em>today's</em> actual revenue in the feature.
+          The model learned to read the answer from the question — trivially inflating accuracy.
+        </div>
+
+        <div class="flaw">
+          <div class="flaw-title">Flaw 2 · Temporal Leakage (random split)</div>
+          Training and test data were randomly shuffled across all years. A model trained on 2023 data
+          was "validated" on 2014 data — the opposite of real forecasting.
+          Lag features of training rows directly encoded test labels.
+        </div>
+
+        <div class="flaw">
+          <div class="flaw-title">Flaw 3 · Prospective Leakage (same-day KPIs)</div>
+          Average basket value and items-per-order are end-of-day outcomes.
+          They cannot exist at the moment a forecast is made, making the model
+          operationally unusable as built.
+        </div>
+
+        <div class="flaw">
+          <div class="flaw-title">Flaw 4 · Preprocessing Leakage (scaler fitted on full dataset)</div>
+          <code>StandardScaler.fit_transform(X)</code> was called on the entire dataset before the train/test split.
+          The scaler's mean and std are contaminated by test-set statistics, violating train/test independence.
+          Fix: fit only on training data, then <code>transform</code>-only on test data.
+        </div>
+
+        <div style="text-align:center; margin-top:0.4em; font-size:0.72em; color:#aac;">
+          Correcting all four flaws brings R² from
+          <span class="red">0.96 (inflated)</span> →
+          <span class="green">0.91 (honest)</span> on genuinely unseen future data.
+        </div>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           SLIDE 2 — Corrected Performance Metrics
+           ═══════════════════════════════════════════════════════════ -->
+      <section data-background-color="#1b1b2f">
+        <h2>Slide 2 &nbsp;·&nbsp; Corrected Model Performance</h2>
+
+        <div class="two-col">
+          <div>
+            <div style="font-size:0.75em; color:#aac; margin-bottom:0.3em;">
+              Validated on held-out future data (2022 – 2023 · 612 days)
+            </div>
+            <div class="card-row" style="flex-direction:column; gap:0.4em;">
+              <div style="display:flex; gap:0.5em;">
+                <div class="card good" style="flex:1">
+                  <div class="val green">0.91</div><div class="lbl">R² (corrected)</div>
+                </div>
+                <div class="card warn" style="flex:1">
+                  <div class="val yellow">9.6 %</div><div class="lbl">MAPE</div>
+                </div>
+              </div>
+              <div style="display:flex; gap:0.5em;">
+                <div class="card" style="flex:1">
+                  <div class="val">2,145 €</div><div class="lbl">MAE per day</div>
+                </div>
+                <div class="card" style="flex:1">
+                  <div class="val">2,721 €</div><div class="lbl">RMSE per day</div>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:0.65em; color:#aac; margin-top:0.4em;">
+              Time-series cross-validation (TimeSeriesSplit · 5 folds):
+              R² = <strong>0.881 ± 0.034</strong>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.75em; color:#aac; margin-bottom:0.3em;">
+              Baseline comparison — Linear regression (3 strongest features)
+            </div>
+            <table class="cmp-table">
+              <thead>
+                <tr><th>Metric</th><th>LR Baseline</th><th>Corrected RF</th><th>Improvement</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>MAE (€)</td><td>2,709</td><td class="green">2,145</td><td class="green">20.8 %</td></tr>
+                <tr><td>RMSE (€)</td><td>3,663</td><td class="green">2,721</td><td class="green">25.7 %</td></tr>
+                <tr><td>MAPE</td><td>16.4 %</td><td class="green">9.6 %</td><td class="green">41.5 %</td></tr>
+                <tr><td>MASE</td><td>1.00 (ref)</td><td class="green">0.792</td><td class="green">Beats baseline</td></tr>
+              </tbody>
+            </table>
+            <div style="font-size:0.65em; color:#aac; margin-top:0.4em;">
+              MASE &lt; 1 confirms the corrected RF meaningfully outperforms the linear regression baseline.
+              <br>Numbers are from model evaluation run on the identical test period.
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           SLIDE 3 — Financial Risk & Recommendation
+           ═══════════════════════════════════════════════════════════ -->
+      <section data-background-color="#0b3d91">
+        <h2>Slide 3 &nbsp;·&nbsp; Financial Risk &amp; Recommendation</h2>
+
+        <div class="two-col">
+          <div>
+            <div style="font-size:0.75em; color:#aac; margin-bottom:0.3em;">
+              Asymmetric cost model &nbsp;·&nbsp; test period 2022 – 2023
+            </div>
+
+            <div style="font-size:0.72em; margin-bottom:0.5em;">
+              Underprediction is <span class="red">10× more costly</span> than overprediction
+              (lost margin vs. warehouse holding cost).
+            </div>
+
+            <div class="risk-bar-wrap">
+              <div class="risk-label">LR baseline — total penalty</div>
+              <div class="risk-bar-bg">
+                <div class="risk-bar-fill" style="width:100%; background:var(--red-alert);">
+                  &nbsp;€ 190.8 M
+                </div>
+              </div>
+            </div>
+
+            <div class="risk-bar-wrap">
+              <div class="risk-label">Corrected RF model — total penalty</div>
+              <div class="risk-bar-bg">
+                <div class="risk-bar-fill" style="width:88%; background:#2980b9;">
+                  &nbsp;€ 168.6 M
+                </div>
+              </div>
+            </div>
+
+            <div class="ci-box">
+              <strong class="yellow">95% Bootstrap CI — Corrected model:</strong><br>
+              €&nbsp;153.0 M &nbsp;–&nbsp; €&nbsp;184.4 M
+              &nbsp;<span style="color:#aac; font-size:0.9em;">(5,000 bootstrap samples)</span>
+            </div>
+
+            <div style="font-size:0.65em; color:#aac; margin-top:0.35em;">
+              Cost function: €20/unit overprediction · €200/unit underprediction.
+              Dominant driver: underprediction penalty accounts for &gt;90% of total cost in both models.
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:0.75em; color:#aac; margin-bottom:0.3em;">
+              Decision support for budget allocation
+            </div>
+
+            <table class="cmp-table">
+              <thead>
+                <tr><th></th><th>LR Baseline</th><th>Corrected RF</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Total penalty (2y)</td><td class="red">€ 190.8 M</td><td class="green">€ 168.6 M</td></tr>
+                <tr><td>Penalty saved vs. baseline</td><td>—</td><td class="green">€ 22.2 M</td></tr>
+                <tr><td>Avg daily penalty</td><td class="red">~ € 312 K</td><td class="green">~ € 275 K</td></tr>
+                <tr><td>Under-forecast days</td><td>—</td><td>350 of 612 days</td></tr>
+              </tbody>
+            </table>
+
+            <div class="rec-box">
+              <div class="rec-title">CFO Recommendation</div>
+              <ul style="margin:0; padding-left:1.2em;">
+                <li>The corrected model is <strong>production-deployable</strong> (MASE 0.79, honest R² 0.91).</li>
+                <li>Prioritise <strong>underprediction reduction</strong> in model tuning — it drives 90%+ of financial exposure (350 of 612 test days).</li>
+                <li>Budget planning should use the 95% CI corridor
+                  (<strong>€153 M – €184 M</strong>) as the risk envelope,
+                  not a point estimate.</li>
+                <li>Do <strong>not</strong> approve the original 96%-model for production — the reported accuracy is an artefact.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.slides -->
+  </div><!-- /.reveal -->
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      transition: 'slide',
+      backgroundTransition: 'fade',
+      width: 1280,
+      height: 760,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0,
+      controls: true,
+      progress: true,
+      center: false,
+    });
+  </script>
+</body>
+</html>
